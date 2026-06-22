@@ -10,174 +10,234 @@
 </head>
 <body>
 
-  <div class="sidebar">
-    <div class="logo">
-      <span class="logo-k">K</span>
-      <div>
-        <div class="logo-title">Kaizen Mailer</div>
-        <div class="logo-sub">by Sahil Sinha</div>
-      </div>
-    </div>
-
-    <nav>
-      <button class="nav-btn active" data-view="compose">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        Compose
-      </button>
-      <button class="nav-btn" data-view="templates">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        Templates
-      </button>
-      <button class="nav-btn" data-view="sent">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        Sent Log
-      </button>
-    </nav>
-
-    <div class="sidebar-footer">
-      <div class="from-badge">
-        <div class="from-dot"></div>
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="logo-k">K</div>
         <div>
-          <div class="from-label">Sending from</div>
-          <div class="from-email" id="fromEmailDisplay">kaizenasc@gmail.com</div>
+          <div class="logo-title">Kaizen Mailer</div>
+          <div class="logo-sub">by Sahil Sinha</div>
         </div>
       </div>
+      <p class="login-hint">Enter access code to continue</p>
+      <div class="pin-row" id="pinRow">
+        <input class="pin-input" maxlength="1" type="password" inputmode="numeric" />
+        <input class="pin-input" maxlength="1" type="password" inputmode="numeric" />
+        <input class="pin-input" maxlength="1" type="password" inputmode="numeric" />
+        <input class="pin-input" maxlength="1" type="password" inputmode="numeric" />
+        <input class="pin-input" maxlength="1" type="password" inputmode="numeric" />
+        <input class="pin-input" maxlength="1" type="password" inputmode="numeric" />
+      </div>
+      <p class="pin-error" id="pinError"></p>
     </div>
   </div>
 
-  <div class="main">
+  <!-- MAIN APP -->
+  <div id="app" style="display:none;">
 
-    <!-- COMPOSE VIEW -->
-    <div id="view-compose" class="view active">
-      <div class="view-header">
-        <h1>New Email</h1>
-        <p>Fill in client details, paste your HTML, preview and send.</p>
+    <div class="sidebar">
+      <div class="logo">
+        <span class="logo-k">K</span>
+        <div>
+          <div class="logo-title">Kaizen Mailer</div>
+          <div class="logo-sub">by Sahil Sinha</div>
+        </div>
       </div>
 
-      <div class="compose-grid">
-        <!-- LEFT: Form -->
-        <div class="compose-form">
+      <nav>
+        <button class="nav-btn active" data-view="compose">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Compose
+        </button>
+        <button class="nav-btn" data-view="clients">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Clients
+        </button>
+        <button class="nav-btn" data-view="templates">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Templates
+        </button>
+        <button class="nav-btn" data-view="sent">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Sent Log
+        </button>
+      </nav>
 
-          <div class="card">
-            <div class="card-label">Recipient</div>
-            <div class="form-row">
-              <div class="field">
-                <label>To *</label>
-                <input id="to" type="email" placeholder="client@company.com" />
-              </div>
-              <div class="field">
-                <label>Subject *</label>
-                <input id="subject" type="text" placeholder="Your email subject" />
-              </div>
-            </div>
-            <div class="field" style="margin-top:12px">
-              <label>Preview Text <span class="opt">optional — shows in inbox below subject</span></label>
-              <input id="previewText" type="text" placeholder="Short teaser shown in inbox..." />
-            </div>
+      <div class="sidebar-footer">
+        <div class="from-badge">
+          <div class="from-dot"></div>
+          <div>
+            <div class="from-label">Sending from</div>
+            <div class="from-email">kaizenasc@gmail.com</div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="card">
-            <div class="card-label">Variables <span class="opt">used in your HTML template</span></div>
-            <div class="form-row">
-              <div class="field">
-                <label>&#123;&#123;name&#125;&#125;</label>
-                <input id="varName" type="text" placeholder="Rahul Mehta" />
-              </div>
-              <div class="field">
-                <label>&#123;&#123;company&#125;&#125;</label>
-                <input id="varCompany" type="text" placeholder="Acme Exports Pvt Ltd" />
-              </div>
-            </div>
-            <div class="form-row" style="margin-top:12px">
-              <div class="field">
-                <label>&#123;&#123;email&#125;&#125;</label>
-                <input id="varEmail" type="text" placeholder="rahul@acme.com" />
-              </div>
-              <div class="field">
-                <label>&#123;&#123;phone&#125;&#125;</label>
-                <input id="varPhone" type="text" placeholder="+91 98765 43210" />
-              </div>
-            </div>
-            <div class="form-row" style="margin-top:12px">
-              <div class="field">
-                <label>&#123;&#123;city&#125;&#125;</label>
-                <input id="varCity" type="text" placeholder="Mumbai" />
-              </div>
-              <div class="field">
-                <label>&#123;&#123;custom&#125;&#125;</label>
-                <input id="varCustom" type="text" placeholder="Any custom value" />
-              </div>
-            </div>
-          </div>
+    <div class="main">
 
-          <div class="card">
-            <div class="card-label-row">
-              <div class="card-label">HTML Body *</div>
-              <div class="template-picker-inline">
+      <!-- COMPOSE VIEW -->
+      <div id="view-compose" class="view active">
+        <div class="view-header">
+          <h1>New Email</h1>
+          <p>Fill in client details, paste your HTML, preview and send.</p>
+        </div>
+
+        <div class="compose-grid">
+          <div class="compose-form">
+
+            <div class="card">
+              <div class="card-label-row">
+                <div class="card-label">Recipient</div>
+                <select id="clientQuickLoad" onchange="loadClientIntoCompose()" style="font-size:12px;padding:6px 10px;min-width:180px;">
+                  <option value="">Load a saved client…</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label>To *</label>
+                  <input id="to" type="email" placeholder="client@company.com" />
+                </div>
+                <div class="field">
+                  <label>Subject *</label>
+                  <input id="subject" type="text" placeholder="Your email subject" />
+                </div>
+              </div>
+              <div class="field" style="margin-top:12px">
+                <label>Preview Text <span class="opt">optional</span></label>
+                <input id="previewText" type="text" placeholder="Short teaser shown in inbox..." />
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Variables</div>
+              <div class="form-row">
+                <div class="field">
+                  <label>&#123;&#123;name&#125;&#125;</label>
+                  <input id="varName" type="text" placeholder="Rahul Mehta" />
+                </div>
+                <div class="field">
+                  <label>&#123;&#123;company&#125;&#125;</label>
+                  <input id="varCompany" type="text" placeholder="Acme Exports Pvt Ltd" />
+                </div>
+              </div>
+              <div class="form-row" style="margin-top:12px">
+                <div class="field">
+                  <label>&#123;&#123;email&#125;&#125;</label>
+                  <input id="varEmail" type="text" placeholder="rahul@acme.com" />
+                </div>
+                <div class="field">
+                  <label>&#123;&#123;phone&#125;&#125;</label>
+                  <input id="varPhone" type="text" placeholder="+91 98765 43210" />
+                </div>
+              </div>
+              <div class="form-row" style="margin-top:12px">
+                <div class="field">
+                  <label>&#123;&#123;city&#125;&#125;</label>
+                  <input id="varCity" type="text" placeholder="Mumbai" />
+                </div>
+                <div class="field">
+                  <label>&#123;&#123;custom&#125;&#125;</label>
+                  <input id="varCustom" type="text" placeholder="Any custom value" />
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label-row">
+                <div class="card-label">HTML Body *</div>
                 <select id="templatePicker" onchange="loadTemplate()">
                   <option value="">Load a saved template…</option>
                 </select>
               </div>
+              <textarea id="htmlBody" rows="16" placeholder="Paste your HTML email template here..."></textarea>
             </div>
-            <textarea id="htmlBody" rows="16" placeholder="Paste your HTML email template here...&#10;&#10;Use {{name}}, {{company}}, {{email}}, {{phone}}, {{city}}, {{custom}} as placeholders."></textarea>
+
+            <div class="action-row">
+              <button class="btn-secondary" onclick="saveAsTemplate()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save Template
+              </button>
+              <button class="btn-secondary" onclick="saveCurrentAsClient()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Save Client
+              </button>
+              <button class="btn-secondary" onclick="switchToPreview()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Preview
+              </button>
+              <button class="btn-send" id="sendBtn" onclick="sendEmail()">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Send Email
+              </button>
+            </div>
+
+            <div id="statusBox" class="status-box" style="display:none"></div>
           </div>
 
-          <div class="action-row">
-            <button class="btn-secondary" onclick="saveAsTemplate()">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              Save as Template
-            </button>
-            <button class="btn-secondary" onclick="switchToPreview()">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              Preview
-            </button>
-            <button class="btn-send" id="sendBtn" onclick="sendEmail()">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Send Email
-            </button>
+          <div class="preview-panel" id="previewPanel">
+            <div class="preview-header">
+              <span>Live Preview</span>
+              <button class="preview-close" onclick="closePreview()">✕</button>
+            </div>
+            <div class="preview-meta" id="previewMeta"></div>
+            <iframe id="previewFrame" title="Email preview"></iframe>
           </div>
+        </div>
+      </div>
 
-          <div id="statusBox" class="status-box" style="display:none"></div>
+      <!-- CLIENTS VIEW -->
+      <div id="view-clients" class="view">
+        <div class="view-header-row">
+          <div>
+            <h1>Clients</h1>
+            <p>Saved client details — load into composer in one click.</p>
+          </div>
+          <button class="btn-send" onclick="openAddClientModal()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Client
+          </button>
         </div>
 
-        <!-- RIGHT: Preview panel -->
-        <div class="preview-panel" id="previewPanel">
-          <div class="preview-header">
-            <span>Live Preview</span>
-            <button class="preview-close" onclick="closePreview()">✕</button>
-          </div>
-          <div class="preview-meta" id="previewMeta"></div>
-          <iframe id="previewFrame" title="Email preview"></iframe>
+        <div style="margin-bottom:16px;">
+          <input id="clientSearch" type="text" placeholder="Search by name, company or email…" oninput="renderClients()" style="max-width:340px;" />
+        </div>
+
+        <div id="clientsList" class="clients-grid"></div>
+        <div id="noClients" class="empty-state">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <p>No clients saved yet.<br/>Add one above or save from the Compose tab.</p>
         </div>
       </div>
-    </div>
 
-    <!-- TEMPLATES VIEW -->
-    <div id="view-templates" class="view">
-      <div class="view-header">
-        <h1>Saved Templates</h1>
-        <p>Your HTML templates — click to load into composer.</p>
+      <!-- TEMPLATES VIEW -->
+      <div id="view-templates" class="view">
+        <div class="view-header">
+          <h1>Saved Templates</h1>
+          <p>Your HTML templates — click to load into composer.</p>
+        </div>
+        <div id="templatesList" class="templates-grid"></div>
+        <div id="noTemplates" class="empty-state">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <p>No templates saved yet.</p>
+        </div>
       </div>
-      <div id="templatesList" class="templates-grid"></div>
-      <div id="noTemplates" class="empty-state">
-        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <p>No templates saved yet.<br>Build one in Compose and save it.</p>
-      </div>
-    </div>
 
-    <!-- SENT LOG VIEW -->
-    <div id="view-sent" class="view">
-      <div class="view-header">
-        <h1>Sent Log</h1>
-        <p>All emails sent this session.</p>
+      <!-- SENT LOG VIEW -->
+      <div id="view-sent" class="view">
+        <div class="view-header">
+          <h1>Sent Log</h1>
+          <p>All emails sent this session.</p>
+        </div>
+        <div id="sentList" class="sent-list"></div>
+        <div id="noSent" class="empty-state">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <p>No emails sent yet this session.</p>
+        </div>
       </div>
-      <div id="sentList" class="sent-list"></div>
-      <div id="noSent" class="empty-state">
-        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        <p>No emails sent yet this session.</p>
-      </div>
-    </div>
 
+    </div>
   </div>
 
   <!-- SAVE TEMPLATE MODAL -->
@@ -191,6 +251,52 @@
       <div class="modal-actions">
         <button class="btn-secondary" onclick="closeModal()">Cancel</button>
         <button class="btn-send" onclick="confirmSaveTemplate()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT CLIENT MODAL -->
+  <div id="clientModalOverlay" class="modal-overlay" onclick="closeClientModal()">
+    <div class="modal" onclick="event.stopPropagation()" style="width:480px;">
+      <div class="modal-title" id="clientModalTitle">Add Client</div>
+      <div class="form-row">
+        <div class="field">
+          <label>Name *</label>
+          <input id="cName" type="text" placeholder="Rahul Mehta" />
+        </div>
+        <div class="field">
+          <label>Company</label>
+          <input id="cCompany" type="text" placeholder="Acme Exports" />
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:12px">
+        <div class="field">
+          <label>Email *</label>
+          <input id="cEmail" type="email" placeholder="rahul@acme.com" />
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input id="cPhone" type="text" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:12px">
+        <div class="field">
+          <label>City</label>
+          <input id="cCity" type="text" placeholder="Mumbai" />
+        </div>
+        <div class="field">
+          <label>Program / Tag</label>
+          <input id="cCustom" type="text" placeholder="Kaizen Green" />
+        </div>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label>Notes</label>
+        <textarea id="cNotes" rows="3" placeholder="Any notes about this client…" style="font-family:Inter,sans-serif;font-size:13px;"></textarea>
+      </div>
+      <input type="hidden" id="cEditId" value="" />
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="closeClientModal()">Cancel</button>
+        <button class="btn-send" onclick="confirmSaveClient()">Save Client</button>
       </div>
     </div>
   </div>
