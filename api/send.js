@@ -1,6 +1,6 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -18,12 +18,14 @@ export default async function handler(req, res) {
   const APP_PASSWORD = process.env.GMAIL_PASS;
 
   if (!FROM_EMAIL || !APP_PASSWORD) {
-    return res.status(500).json({ error: "Server email credentials not configured" });
+    return res.status(500).json({ error: "Env vars GMAIL_USER or GMAIL_PASS not set on Vercel" });
   }
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
         user: FROM_EMAIL,
         pass: APP_PASSWORD,
@@ -46,4 +48,4 @@ export default async function handler(req, res) {
     console.error("Send error:", err);
     return res.status(500).json({ error: err.message });
   }
-}
+};
